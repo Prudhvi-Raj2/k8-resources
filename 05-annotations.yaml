@@ -5,6 +5,9 @@ metadata:
   annotations:
     author: "Prudhvi Raj"
     purpose: "Demo for annotations"
+    buildUrl: "http://mycompany/expense/builds/1000"
+    imageRegistry: "dockerhub"
+    imageTag: "v1.0.0"
 spec:
   containers:
   - name: nginx
