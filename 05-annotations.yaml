@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotations
+  annotations:
+    author: "Prudhvi Raj"
+    purpose: "Demo for annotations"
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
