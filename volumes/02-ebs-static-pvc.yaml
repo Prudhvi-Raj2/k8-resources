@@ -14,13 +14,13 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ebs-static
+  name: ebs-static-nginx
 spec:
   containers:
   - name: nginx
     image: nginx
     volumeMounts:
-    - name: Persistent-Storage
+    - name: persistent-storage
       mountPath: /usr/share/nginx/html
   volumes:
   - name: persistent-storage
