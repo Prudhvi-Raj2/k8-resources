@@ -4,7 +4,6 @@ metadata:
   name: ebs-dynamic
 spec:
   storageClassName: "ebs-sc" #must be empty for dynamic provisioning otherwise dynamic provisioning will be used
-  volumeName: ebs-dynamic
   accessModes:
     - ReadWriteOnce
   resources:
