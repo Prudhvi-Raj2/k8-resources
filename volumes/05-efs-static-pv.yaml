@@ -1,4 +1,5 @@
 apiversion: v1
+kind: PersistentVolume
 metadata: 
   name: efs-static
 spec:
