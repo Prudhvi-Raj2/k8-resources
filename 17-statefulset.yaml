@@ -22,7 +22,7 @@ metadata:
 spec:
   serviceName: "nginx-headless" #must be same as headless service name
   replicas: 3
-  minimumReadySeconds: 10
+  minimumReadySeconds: 15
   selector:
     matchLabels:
       app: nginx
