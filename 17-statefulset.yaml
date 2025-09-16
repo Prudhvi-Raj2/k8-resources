@@ -1,0 +1,55 @@
+apiversion: v1
+kind: Service
+metadata:
+  name: nginx-headless
+  labels: 
+    app: nginx
+    demo: statefulset
+spec: 
+  ports:
+    - port: 80
+      name: web
+  selector:
+    app: nginx
+    demo: statefulset
+  clusterIP: None #headless service for statefulset
+#we need to take either ebs or efs drivers for dynamic provisioning, I will go for ebs dynamic provisioning
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx
+spec:
+  serviceName: "nginx-headless" #must be same as headless service name
+  replicas: 3
+  minimumReadySeconds: 10
+  selector:
+    matchLabels:
+      app: nginx
+      demo: statefulset
+  template:
+    metadata:
+      labels:
+        app: nginx
+        demo: statefulset
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: registry.k8s.io/nginx-slim:0.8
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  #instead of creating pvc resource, you can directly provide in statefulset
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ebs-sc" #storage class for dynamic provisioning
+      resources:
+        requests:
+          storage: 1Gi
