@@ -20,13 +20,14 @@ kind: StatefulSet
 metadata:
   name: nginx
 spec:
-  serviceName: "nginx-headless" #must be same as headless service name
-  replicas: 3
-  minimumReadySeconds: 15
   selector:
     matchLabels:
       app: nginx
       demo: statefulset
+  serviceName: "nginx-headless" #must be same as headless service name
+  replicas: 3
+  minimumReadySeconds: 10
+
   template:
     metadata:
       labels:
